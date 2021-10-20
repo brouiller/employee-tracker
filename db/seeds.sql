@@ -1,12 +1,12 @@
 INSERT INTO
-    department (name)
+    departments (name)
 VALUES
     ("Engineering"),
     ("Finance"),
     ("Legal");
 
 INSERT INTO
-    role (title, salary, department_id)
+    roles (title, salary, department_id)
 VALUES
     ("Accountant", 80000, 2),
     ("Lawyer", 65000, 3),
@@ -17,13 +17,13 @@ VALUES
     ("Clerk", 63000, 2);
 
 INSERT INTO
-    employee (first_name, last_name, role_id, manager_id)
+    employees (first_name, last_name, role_id, manager_id)
 VALUES
-    ("Jane", "Dane", 1, 5),
+    ("Jane", "Dane", 5, NULL),
     ("Jon", "Don", 2, NULL),
     ("Jenna", "Denna", 3, NULL),
     ("Joe", "Doe", 4, 2),
-    ("Jeff", "Deff", 5, NULL),
+    ("Jeff", "Deff", 1, 1),
     ("Judy", "Duty", 6, 3),
     ("James", "Dames", 7, 5),
     ("Janet", "Dammit", 7, 3),

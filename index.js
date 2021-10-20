@@ -1,67 +1,77 @@
-//use dotenv to hide mysql variables
-const private = require("dotenv").config();
 const inquirer = require("inquirer");
-const mysql = require("mysql2");
-
-const { firstQuestion } = require("./lib/questions");
-
-// Connect to database
-// const db = mysql.createConnection(
-//   {
-//     host: process.env.DB_HOST,
-//     username: process.env.DB_USER,
-//     password: process.env.DB_PASS,
-//     database: "employees_db",
-//   },
-//   console.log(`Connected to the employees_db database.`)
-// );
+const { addStuff } = require("./db/connection");
+const { firstQuestions, addDepartmentQuestion } = require("./lib/questions");
 
 const firstPrompt = () => {
-  inquirer.prompt(firstQuestion).then((answer) => {
+  inquirer.prompt(firstQuestions).then((answer) => {
+    console.log(answer.choose);
     switch (answer.choose) {
       case "Add A Department":
-        addA(department);
+        addA("department");
         break;
       case "Add A Role":
-        addA(role);
+        addA("role");
         break;
       case "Add An Employee":
-        addA(employee);
+        addA("employee");
         break;
       case "Delete A Department":
-        deleteA(department);
+        deleteA("department");
         break;
       case "Delete A Role":
-        deleteA(role);
+        deleteA("role");
         break;
       case "Delete An Employee":
-        deleteA(employee);
+        deleteA("employee");
         break;
       case "Update An Employee Manager":
-        updateA(manager);
+        updateA("manager");
         break;
       case "Update An Employee Role":
-        updateA(role);
+        updateA("role");
         break;
       case "View All Departments":
-        viewAll(department);
+        viewAll("department");
         break;
       case "View All Employees":
-        viewAll(employee);
+        viewAll("employee");
         break;
       case "View All Roles":
-        viewAll(role);
+        viewAll("role");
         break;
       case "View Department Total Utilized Budget":
-        view(budget);
+        view("budget");
         break;
       case "View Employees By Department":
-        view(employees);
+        view("employees");
         break;
     }
   });
 };
 
+const addA = (type) => {
+  switch (type) {
+    case "department":
+      inquirer.prompt(addDepartmentQuestion).then((answer) => {
+        addStuff("department", answer.departmentName);
+        console.log(
+          `The ${answer.departmentName} department has been created.`
+        );
+        firstPrompt();
+      });
+      break;
+    case "role":
+      inquirer.prompt(addDepartmentQuestion).then((answer) => {
+        addStuff("department", answer.departmentName);
+        console.log(
+          `The ${answer.departmentName} department has been created.`
+        );
+        firstPrompt();
+      });
+      break;
+  }
+};
+firstPrompt();
 // Create an employee
 // app.post("/api/new-movie", ({ body }, res) => {
 //   const sql = `INSERT INTO movies (movie_name)
