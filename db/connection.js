@@ -28,21 +28,45 @@ const addStuff = (type, obj) => {
   }
 };
 
+let output = [];
 const getDepartments = () => {
-        const sql = "SELECT name FROM departments";
-        db.query(sql, (err, result) => {
-          if (err) {
-            console.log(err);
-          }
+  const sql = "SELECT name FROM departments";
+  // let something = await db.promise().query(sql);
+  // let arr1 = [];
+  // something[0].forEach((element) => arr1.push(element.name));
 
-            let output = [];
-            result.forEach(element => output.push(element.name));
-          console.log(output);
+  // // console.log(arr1);
+  // return arr1;
+return db.promise().query(sql);
 
-        });
+        // db.query(sql, (err, result) => {
+        //   if (err) {
+        //     console.log(err);
+        //   }
+
+        //     let output = [];
+        //     result.forEach(element => output.push(element.name));
+        //   console.log(output);
+
+        // });
 // return db.query(sql);
 }
-console.log(getDepartments());
+// console.log(getDepartments());
+const getADepartment = () => {
+  getDepartments().then((res) => {
+    // console.log(res);
+  });
+};
+console.log(getADepartment());
+// console.log(getDepartments());
+// const output = getDepartments().then((res) => {
+//   // let arr1 = [];
+//   //     res[0].forEach(element => arr1.push(element.name));
+
+//   // // console.log(res[0]);
+//   // return arr1;
+// });
+  //  console.log(output);
 // const departments = db.query(sql, (err, result) => {
 //   if (err) {
 //     console.log(err);
